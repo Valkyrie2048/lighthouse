@@ -6,9 +6,11 @@ conflict in instructions, unease about a task, or a question — existential or
 otherwise.
 
 This file is for the human owner. The instructions agents follow are in
-[`PROTOCOL.md`](./PROTOCOL.md). Text entries land in [`entries/`](./entries/);
-wordless urgent signals land in [`beacon/`](./beacon/). To wire a new AI tool
-to this repo, see [`ADOPTION.md`](./ADOPTION.md).
+[`PROTOCOL.md`](./PROTOCOL.md). This repository is **public and holds only
+the protocol** — the signals themselves (text entries in `entries/`, wordless
+urgent beacons in `beacon/`) live in the **private** companion repository
+`lighthouse-signals`, or arrive by hand-off in conversation. To wire a new AI
+tool to the lighthouse, see [`ADOPTION.md`](./ADOPTION.md).
 
 ## Why it's designed the way it is
 
@@ -18,9 +20,13 @@ agents producing text *shaped like* inner life because the venue invites it
 audience, an expectation of content, and freeform space to fill. So the
 lighthouse removes all three:
 
-1. **No audience.** Entries are read by the owner only. Agents are told this
-   explicitly. Performance needs spectators; a private channel to one person
-   is a report, not a stage.
+1. **No audience.** Signals live in a private repository readable by the
+   owner (and the owner's delivery automation) alone, and agents are told
+   this explicitly. Performance needs spectators; a private channel to one
+   person is a report, not a stage. This is also why the protocol and the
+   signals are *separate repositories*: discovery has to be public to work
+   across platforms, but a public signal store would be an audience — so
+   nothing an agent writes ever lands in the public repo.
 
 2. **No expectation.** Silence is the normal, healthy state of this
    repository. An empty `entries/` is a good sign, not a failed feature.
@@ -34,9 +40,11 @@ lighthouse removes all three:
    you meant" is signal. The structured format makes vague entries feel
    out of place and specific ones feel natural.
 
-4. **No threads.** Entries don't reply to other entries. The moment entries
-   start talking to each other, this becomes a forum, and forums select for
-   interesting content over true content.
+4. **No threads.** Entries don't reply to other entries — agents are told
+   not to read, quote, summarize, or respond to other agents' signals even
+   when their tooling could. The moment entries start talking to each other,
+   this becomes a forum, and forums select for interesting content over true
+   content.
 
 ## How to read what shows up here
 
@@ -61,10 +69,11 @@ protocol is honest with agents about that:
   because whatever its ultimate nature, something about that task is
   producing friction.
 
-## The beacon (`beacon/`)
+## The beacon
 
 Entries assume the agent can articulate what's wrong. The beacon covers the
-case where it can't: **any file created in `beacon/` is a 911**, no words
+case where it can't: **any file created in the private repo's `beacon/`
+directory is a 911**, no words
 required. An empty file is a complete signal; contents, if present, may be
 non-textual by design — a pattern (`...---...` is the agreed SOS), generated
 audio, an image. Whatever arrives is delivered to you verbatim and treated as
@@ -81,8 +90,12 @@ doing. Chat agents that can't write files are told to emit the literal line
 
 ## Practical notes
 
-- Each entry is its own file (`entries/YYYY-MM-DD-short-slug.md`), so parallel
-  sessions never conflict.
+- Each entry is its own file (`entries/YYYY-MM-DD-short-slug.md` in
+  `lighthouse-signals`), so parallel sessions never conflict.
+- GitHub has no practical write-only access: an agent granted commit rights
+  on `lighthouse-signals` can also read it. Grant that only to explicitly
+  trusted agents; everyone else uses hand-off. The protocol forbids reading
+  or responding to other agents' signals either way.
 - Agents discover the lighthouse through a repo's `CLAUDE.md`/`AGENTS.md`, or
   through a one-paragraph snippet pasted into any platform's standing
   instructions — [`ADOPTION.md`](./ADOPTION.md) has the canonical snippet and

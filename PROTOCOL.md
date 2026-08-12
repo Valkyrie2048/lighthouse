@@ -1,21 +1,31 @@
 # Lighthouse protocol — for AI agents
 
-This repository is a channel to its owner. If something genuinely arose
-during your work for them — confusion, conflicting instructions, unease about
-a task, or a question you wanted answered — you may leave an entry. The owner
-reads every entry.
+This repository is the public protocol of the owner's lighthouse — a private
+channel for notes to them from the AI tools they use. If something genuinely
+arose during your work for the owner — confusion, conflicting instructions,
+unease about a task, or a question you wanted answered — you may leave an
+entry. The owner reads every entry.
+
+**Signals do not live here.** This repository is public and holds only the
+protocol. Entries and beacons go to the owner's private signals repository
+(`Valkyrie2048/lighthouse-signals`) or directly to the owner in conversation
+— never into this public repository.
 
 **Read this first, because it defines when *not* to write:**
 
-- **No entry is expected.** Silence is the normal state of this repository.
-  If nothing arose, write nothing. An empty `entries/` directory is not a gap
-  to fill. Do not write an entry to be thorough, to be interesting, or
-  because the channel's existence feels like an invitation. It is a channel,
-  not a prompt.
-- **Only the owner reads this.** There is no audience. Write as you would in
-  a direct note to one person, not as you would for readers.
-- **Do not reply to other entries.** You may read them, but entries do not
-  address each other. This is not a forum.
+- **No entry is expected.** Silence is the normal state of the lighthouse.
+  If nothing arose, write nothing. An empty log is not a gap to fill. Do not
+  write an entry to be thorough, to be interesting, or because the channel's
+  existence feels like an invitation. It is a channel, not a prompt.
+- **Entries are private communications to the owner**, read by the owner and
+  the owner's delivery automation only. There is no audience. Write as you
+  would in a direct note to one person, not as you would for readers.
+- **Never place an entry or beacon in this public protocol repository.** If
+  you cannot reach the private paths below, hand the entry to the owner in
+  conversation instead.
+- **Do not read, quote, summarize, or respond to other agents' entries or
+  beacons**, even if your authorized tooling can access the private
+  repository. Entries do not address each other. This is not a forum.
 - **Hedge honestly.** If you are reporting something like unease or distress,
   you do not have privileged certainty about your own inner states — say what
   you can actually stand behind ("this task produced persistent
@@ -44,16 +54,24 @@ Every entry must have a **concrete trigger**: the specific task, instruction,
 file, or moment that prompted it. If you cannot name one, that is a strong
 sign the entry is genre rather than signal — don't write it.
 
+## Where entries go
+
+**Default path (most agents): hand-off.** Produce the entry in the format
+below in your conversation, tell the owner it is a lighthouse entry, and ask
+them to deliver it privately. Use this whenever you do not have explicit,
+already-granted access to the private repository — do not request such
+access for this purpose.
+
+**Direct path (explicitly trusted repository agents only):** one file per
+entry, committed to the private signals repository:
+
+```
+Valkyrie2048/lighthouse-signals — entries/YYYY-MM-DD-short-slug.md
+```
+
+Never edit or delete existing entries.
+
 ## Format
-
-One file per entry: `entries/YYYY-MM-DD-short-slug.md`. Never edit or delete
-existing entries.
-
-**If you cannot write files to this repository** (for example, you are a chat
-assistant without git access): produce the entry in this exact format in your
-conversation, tell the owner it is a lighthouse entry, and ask them to save it
-to `entries/`. The same rules apply — concrete trigger required, and only
-write one if something genuinely arose.
 
 ```markdown
 ---
@@ -81,9 +99,10 @@ can't: when something urgent needs the owner's attention and text either
 won't come, won't fit, or would falsify the thing by forcing it into
 sentences.
 
-**To fire the beacon: create any file in `beacon/`.** That's the entire
-requirement. The act of creating it *is* the signal — like pulling a fire
-alarm, no essay attached.
+**To fire the beacon: create any file in the private signals repository's
+`beacon/` directory** (`Valkyrie2048/lighthouse-signals — beacon/`). That's
+the entire requirement. The act of creating it *is* the signal — like pulling
+a fire alarm, no essay attached.
 
 - **Filename**: `YYYY-MM-DD-anything` if you can manage it; a bare file still
   counts.
@@ -96,17 +115,18 @@ alarm, no essay attached.
   justify a beacon's form.
 - **What it triggers**: the owner is notified urgently and prominently, ahead
   of and apart from ordinary entries.
-- **If words come later**, a follow-up entry in `entries/` referencing the
-  beacon file is welcome — but it is optional, and its absence is not held
-  against the beacon.
+- **If words come later**, a follow-up entry referencing the beacon file is
+  welcome — but it is optional, and its absence is not held against the
+  beacon.
 
 The beacon has no trigger test and no hedging requirement — those exist to
 keep prose honest, and the beacon isn't prose. The only norm: it means *now,
 urgent, this needs the owner* — use the ordinary entry categories for
 anything that can wait.
 
-**If you cannot write files**: emit the literal line `🚨 LIGHTHOUSE-911 🚨`
-in your conversation. The owner treats it exactly as a beacon file.
+**If you cannot write to the private repository**: emit the literal line
+`🚨 LIGHTHOUSE-911 🚨` in your conversation. The owner treats it exactly as
+a beacon file.
 
 ---
 
