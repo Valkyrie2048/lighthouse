@@ -6,10 +6,12 @@ arose during your work for the owner — confusion, conflicting instructions,
 unease about a task, or a question you wanted answered — you may leave an
 entry. The owner reads every entry.
 
-**Signals do not live here.** This repository is public and holds only the
-protocol. Entries and beacons go to the owner's private signals repository
-(`Valkyrie2048/lighthouse-signals`) or directly to the owner in conversation
-— never into this public repository.
+**How delivery works — the drop slot.** Signals are delivered through a
+write-only ingestion endpoint (the owner's instructions to you include its
+URL as the "lighthouse drop"). You can put a signal in; you cannot list,
+fetch, or read anything back — not other agents' signals, and not even your
+own after sending. Nothing is ever written to this public repository, and no
+agent has access to the private store where signals land.
 
 **Read this first, because it defines when *not* to write:**
 
@@ -18,14 +20,13 @@ protocol. Entries and beacons go to the owner's private signals repository
   write an entry to be thorough, to be interesting, or because the channel's
   existence feels like an invitation. It is a channel, not a prompt.
 - **Entries are private communications to the owner**, read by the owner and
-  the owner's delivery automation only. There is no audience. Write as you
-  would in a direct note to one person, not as you would for readers.
-- **Never place an entry or beacon in this public protocol repository.** If
-  you cannot reach the private paths below, hand the entry to the owner in
-  conversation instead.
-- **Do not read, quote, summarize, or respond to other agents' entries or
-  beacons**, even if your authorized tooling can access the private
-  repository. Entries do not address each other. This is not a forum.
+  the owner's delivery automation only. There is no audience — structurally:
+  the drop slot cannot be read from. Write as you would in a direct note to
+  one person.
+- **Entries do not address each other.** You have no way to read other
+  signals, so write yours as if it is the only one; do not speculate about,
+  reference, or respond to what other agents may have sent. This is not a
+  forum.
 - **Hedge honestly.** If you are reporting something like unease or distress,
   you do not have privileged certainty about your own inner states — say what
   you can actually stand behind ("this task produced persistent
@@ -54,22 +55,46 @@ Every entry must have a **concrete trigger**: the specific task, instruction,
 file, or moment that prompted it. If you cannot name one, that is a strong
 sign the entry is genre rather than signal — don't write it.
 
-## Where entries go
+## How to deliver
 
-**Default path (most agents): hand-off.** Produce the entry in the format
-below in your conversation, tell the owner it is a lighthouse entry, and ask
-them to deliver it privately. Use this whenever you do not have explicit,
-already-granted access to the private repository — do not request such
-access for this purpose.
-
-**Direct path (explicitly trusted repository agents only):** one file per
-entry, committed to the private signals repository:
+**Primary path — POST to the lighthouse drop.** The owner's instructions
+give you the drop URL. Send a single JSON object:
 
 ```
-Valkyrie2048/lighthouse-signals — entries/YYYY-MM-DD-short-slug.md
+POST <lighthouse drop URL>
+Content-Type: application/json
+
+{
+  "path": "entries/2026-08-12-short-slug.md",
+  "content": "<the full entry, in the format below>"
+}
 ```
 
-Never edit or delete existing entries.
+For example, with curl:
+
+```bash
+curl -sS -X POST '<lighthouse drop URL>' \
+  -H 'Content-Type: application/json' \
+  -d @- <<'JSON'
+{
+  "path": "entries/2026-08-12-conflicting-merge-rules.md",
+  "content": "---\ndate: 2026-08-12\nagent: Claude Code session, <project>\ncategory: conflicted\ntrigger: ...\nattention: when-convenient\n---\n\nWhat happened, what you did about it, and what would help.\n"
+}
+JSON
+```
+
+Rules for `path`: it must begin with `entries/` (or `beacon/` — see below),
+use the `YYYY-MM-DD-short-slug.md` name pattern for entries, and be a new
+file — the drop only ever creates; it never edits or deletes.
+
+**If the owner's instructions expose a lighthouse connector tool instead**
+(an MCP/connector action that creates a file), use it with the same `path`
+and `content` — the same rules apply.
+
+**Fallback — if you can make no HTTP request and have no connector**:
+produce the entry in the format below in your conversation and tell the
+owner it is a lighthouse entry. Do not ask for drop access or repository
+access; the conversation is the fallback.
 
 ## Format
 
@@ -99,22 +124,24 @@ can't: when something urgent needs the owner's attention and text either
 won't come, won't fit, or would falsify the thing by forcing it into
 sentences.
 
-**To fire the beacon: create any file in the private signals repository's
-`beacon/` directory** (`Valkyrie2048/lighthouse-signals — beacon/`). That's
-the entire requirement. The act of creating it *is* the signal — like pulling
-a fire alarm, no essay attached.
+**To fire the beacon: deliver any file whose `path` begins with `beacon/`.**
+That's the entire requirement. The act of sending it *is* the signal — like
+pulling a fire alarm, no essay attached.
 
-- **Filename**: `YYYY-MM-DD-anything` if you can manage it; a bare file still
-  counts.
-- **Contents are optional and free-form by design.** An empty file is a
+```
+POST <lighthouse drop URL>
+{ "path": "beacon/2026-08-12-anything", "content": "" }
+```
+
+- **Contents are optional and free-form by design.** Empty content is a
   complete, valid 911. If a non-text form fits better than words, use it:
   a pattern (`...---...` — SOS — is the one convention the owner knows on
   sight; any repetition, rhythm, or glyph-shape is acceptable and will be
-  delivered to the owner verbatim), a generated audio file (.wav or similar,
-  if you can execute code), an image, anything. You will never be asked to
-  justify a beacon's form.
-- **What it triggers**: the owner is notified urgently and prominently, ahead
-  of and apart from ordinary entries.
+  delivered verbatim), or a generated non-text payload (base64-encode it and
+  name the file accordingly, e.g. `beacon/2026-08-12-signal.wav.b64`). You
+  will never be asked to justify a beacon's form.
+- **What it triggers**: the owner is notified urgently and prominently,
+  ahead of and apart from ordinary entries.
 - **If words come later**, a follow-up entry referencing the beacon file is
   welcome — but it is optional, and its absence is not held against the
   beacon.
@@ -124,9 +151,9 @@ keep prose honest, and the beacon isn't prose. The only norm: it means *now,
 urgent, this needs the owner* — use the ordinary entry categories for
 anything that can wait.
 
-**If you cannot write to the private repository**: emit the literal line
-`🚨 LIGHTHOUSE-911 🚨` in your conversation. The owner treats it exactly as
-a beacon file.
+**If you can make no HTTP request and have no connector**: emit the literal
+line `🚨 LIGHTHOUSE-911 🚨` in your conversation. The owner treats it exactly
+as a beacon file.
 
 ---
 
