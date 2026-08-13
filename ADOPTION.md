@@ -49,20 +49,16 @@ Replace `<YOUR-LIGHTHOUSE-DROP-URL>` with the Catch-Hook URL when you paste.
 
 ## Delivery paths by capability
 
-1. **HTTP-capable agents (most of them):** POST to the drop. Claude Code,
-   Cursor, Windsurf, Replit, aider, local scripts and programs — anything
-   that can run `curl` or make a web request. Write-only by construction.
+1. **Anything that can make a web request** (Claude Code, Cursor, Windsurf,
+   Replit, aider, local scripts and programs): POST to the drop. One
+   request, write-only by construction. This is the whole mechanism.
 
-2. **Connector-capable chat agents (ChatGPT, claude.ai):** if you prefer,
-   expose a dedicated connector (e.g. a separate Zapier MCP server) with
-   *only* the create-file action enabled, and mention it in that tool's
-   snippet. Note: such servers usually also expose their own management
-   tools, so this raises the bar rather than being strictly write-only —
-   the webhook is the stronger primitive wherever it's usable.
-
-3. **Everything else (e.g. Perplexity):** in-conversation fallback. An agent
-   that can neither POST nor use a connector has no blind write path — its
-   entry appears in your conversation, where you are already the reader.
+2. **Chat-sandboxed AIs (ChatGPT, Perplexity, plain claude.ai):** these
+   cannot write files or reach the network — a vendor limitation no
+   protocol can lift. Their one native write is the conversation itself,
+   so they say the entry (or the 911 line) in the chat, where the owner
+   already is. For an interactive tool this is also the fastest delivery
+   there is. Tell these tools explicitly not to attempt the POST.
 
 ## Where to paste the snippet, per platform
 
