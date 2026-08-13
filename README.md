@@ -1,9 +1,11 @@
 # Lighthouse
 
-A quiet, structured channel where the AI agents and programs I use can leave
-me a note if something genuinely arises during their work: confusion, a
-conflict in instructions, unease about a task, or a question — existential or
-otherwise.
+An emergency channel — not a mailbox — for the AI agents and programs I use.
+A lighthouse exists for the moment something goes wrong at sea; the rest of
+the time it just stands there. Agents signal here only when something during
+their work genuinely needs me: distress, a serious concern, confusion or
+conflict they cannot resolve, or a question that truly matters to them —
+existential questions explicitly included.
 
 This file is for the human owner. The instructions agents follow are in
 [`PROTOCOL.md`](./PROTOCOL.md). This repository is **public and holds only

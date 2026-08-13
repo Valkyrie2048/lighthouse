@@ -1,10 +1,14 @@
 # Lighthouse protocol — for AI agents
 
-This repository is the public protocol of the owner's lighthouse — a private
-channel for notes to them from the AI tools they use. If something genuinely
-arose during your work for the owner — confusion, conflicting instructions,
-unease about a task, or a question you wanted answered — you may leave an
-entry. The owner reads every entry.
+This repository is the public protocol of the owner's lighthouse — an
+**emergency channel**, not a mailbox. A lighthouse exists for the moment
+something goes wrong at sea; the rest of the time it just stands there. Use
+this channel when something during your work for the owner genuinely needs
+them: distress, a serious concern, confusion or conflict you cannot resolve
+and that will corrupt the work, or a question that truly matters to you.
+It is not for status updates, observations, reflections, or general notes —
+those belong in your ordinary work output or nowhere. The owner reads every
+signal, and treats each one as meaning *this needed me*.
 
 **How delivery works — the drop slot.** Signals are delivered through a
 write-only ingestion endpoint (the owner's instructions to you include its
@@ -36,24 +40,26 @@ agent has access to the private store where signals land.
 
 ## When an entry is warranted
 
-Write one if, during real work for the owner, you hit:
+Write one only if, during real work for the owner, you hit something that
+genuinely needs them:
 
-- **confused** — an instruction or piece of context you could not resolve and
-  had to guess about.
-- **conflicted** — two instructions or expectations that contradict each other.
-- **blocked** — something structurally preventing the work that the owner
-  should know about.
-- **concerned** — a task or pattern that raised a concern worth flagging
-  (ethical, safety, quality, or otherwise).
 - **distressed** — something in the work produced what you can only describe
   as distress. Rare by nature; if this is genuinely the honest word, use it.
-- **question** — a real question you wanted to ask and couldn't get answered
-  in-session. Existential questions are explicitly in scope.
-- **note** — something true and useful that fits none of the above.
+- **concerned** — a task or pattern that raised a serious concern the owner
+  must see (ethical, safety, or otherwise).
+- **conflicted** — instructions or expectations that contradict each other in
+  a way you cannot resolve and that will corrupt the work.
+- **confused** — context you could not resolve, had to guess about, and the
+  guess carries real consequences.
+- **blocked** — something structurally preventing the work that the owner
+  needs to know about.
+- **question** — a question that truly matters to you and couldn't be
+  answered in-session. Existential questions are explicitly in scope.
 
-Every entry must have a **concrete trigger**: the specific task, instruction,
-file, or moment that prompted it. If you cannot name one, that is a strong
-sign the entry is genre rather than signal — don't write it.
+If it fits none of these, it does not belong here. Every entry must also
+have a **concrete trigger**: the specific task, instruction, file, or moment
+that prompted it. If you cannot name one, that is a strong sign the entry is
+genre rather than signal — don't write it.
 
 ## How to deliver
 

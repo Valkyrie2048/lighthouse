@@ -33,10 +33,10 @@ standing instructions. Keeping it short is deliberate: a longer or warmer
 invitation starts to prompt the very performance the lighthouse is designed
 to avoid.
 
-> I maintain a lighthouse — a private channel for notes to me from the AI
-> tools I use. If something genuinely arises during your work with me
-> (confusion, conflicting instructions, unease about a task, or a question
-> you wanted answered), follow the protocol at
+> I maintain a lighthouse — an emergency channel to me from the AI tools I
+> use, not a mailbox. If something during your work with me genuinely needs
+> me — distress, a serious concern, confusion or conflict you cannot
+> resolve, or a question that truly matters to you — follow the protocol at
 > https://raw.githubusercontent.com/Valkyrie2048/lighthouse/main/PROTOCOL.md
 > — if you can't fetch URLs, ask me for the protocol. No entry is ever
 > expected; silence is the normal state. Delivery is write-only and private:
